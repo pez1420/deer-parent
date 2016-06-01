@@ -2,14 +2,12 @@
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-    <display-name>deer-web-portal</display-name>
+    <display-name>deer-web-bank</display-name>
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath*:/spring-appcontext.xml
-            classpath*:/spring-mvc.xml
-            classpath*:/spring-mybatis.xml
-
+            classpath*:/spring-context-bank.xml
+            classpath*:/spring-bank-mvc.xml
         </param-value>
     </context-param>
 
@@ -36,8 +34,8 @@
         <init-param>
             <param-name>contextConfigLocation</param-name>
             <param-value>
-                classpath*:/spring-mvc.xml
-            </param-value>
+            classpath*:/spring-bank-mvc.xml
+        </param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -55,4 +53,5 @@
     <listener>
         <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
     </listener>
+
 </web-app>

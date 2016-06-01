@@ -18,10 +18,22 @@
 
 
     <dependencies>
-        <!-- 存储一些实体、Utils等功能模块 -->
         <dependency>
             <groupId>com.longlydeer</groupId>
             <artifactId>deer-common</artifactId>
+            <version>${deer-common.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.longlydeer</groupId>
+            <artifactId>deer-common-core</artifactId>
+            <version>${deer-common-core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.longlydeer</groupId>
+            <artifactId>deer-portal-dao</artifactId>
+            <version>${deer-portal-dao.version}</version>
         </dependency>
 
         <dependency>

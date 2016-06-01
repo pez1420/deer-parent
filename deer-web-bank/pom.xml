@@ -6,42 +6,16 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>deer-web-portal</artifactId>
+    <artifactId>deer-web-bank</artifactId>
     <packaging>war</packaging>
     <name>${project.artifactId}</name>
 
     <dependencies>
         <dependency>
             <groupId>com.longlydeer</groupId>
-            <artifactId>deer-kyo</artifactId>
-            <version>${deer-kyo.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.longlydeer</groupId>
             <artifactId>deer-common</artifactId>
             <version>${deer-common.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.longlydeer</groupId>
-            <artifactId>deer-common-core</artifactId>
-            <version>${deer-common-core.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.longlydeer</groupId>
-            <artifactId>deer-common-config</artifactId>
-            <version>${deer-common-config.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.longlydeer</groupId>
-            <artifactId>deer-common-web</artifactId>
-            <version>${deer-common-web.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.longlydeer</groupId>
-            <artifactId>deer-portal-service</artifactId>
-            <version>${deer-portal-service.version}</version>
-        </dependency>
-
 
         <dependency>
             <groupId>junit</groupId>
@@ -247,10 +221,8 @@
         </dependency>
 
     </dependencies>
-
-
     <build>
-        <finalName>deer-web-portal</finalName>
+        <finalName>deer-web-bank</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

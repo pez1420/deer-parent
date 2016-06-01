@@ -20,11 +20,19 @@
         <dependency>
             <groupId>com.longlydeer</groupId>
             <artifactId>deer-common</artifactId>
+            <version>${deer-common.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.longlydeer</groupId>
+            <artifactId>deer-common-core</artifactId>
+            <version>${deer-common-core.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.longlydeer</groupId>
             <artifactId>deer-portal-service</artifactId>
+            <version>${deer-portal-service.version}</version>
         </dependency>
 
     </dependencies>

@@ -12,7 +12,6 @@
     <description>The parent project of deer</description>
     <modules>
         <module>deer-common</module>
-        <module>deer-web</module>
         <module>deer-kyo</module>
         <module>deer-common-config</module>
         <module>deer-common-core</module>
@@ -21,11 +20,23 @@
         <module>deer-portal-service</module>
         <module>deer-portal-service-impl</module>
         <module>deer-web-portal</module>
+        <module>deer-web-bank</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.7</java.version>
+
+        <deer-kyo.version>1.0-SNAPSHOT</deer-kyo.version>
+        <deer-common.version>1.0-SNAPSHOT</deer-common.version>
+        <deer-common-config.version>1.0-SNAPSHOT</deer-common-config.version>
+        <deer-common-core.version>1.0-SNAPSHOT</deer-common-core.version>
+        <deer-common-web.version>1.0-SNAPSHOT</deer-common-web.version>
+        <deer-portal-dao.version>1.0-SNAPSHOT</deer-portal-dao.version>
+        <deer-portal-service.version>1.0-SNAPSHOT</deer-portal-service.version>
+        <deer-portal-service-impl.version>1.0-SNAPSHOT</deer-portal-service-impl.version>
+        <deer-web-portal.version>1.0-SNAPSHOT</deer-web-portal.version>
+
         <junit.veision>4.10</junit.veision>
         <easymock.version>3.4</easymock.version>
         <servlet.api.version>2.5</servlet.api.version>
@@ -87,39 +98,6 @@
                 <scope>test</scope>
             </dependency>
 
-            <!-- 存储一些实体、Utils等功能模块 -->
-            <dependency>
-                <groupId>com.longlydeer</groupId>
-                <artifactId>deer-common</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.longlydeer</groupId>
-                <artifactId>deer-portal-dao</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <!-- 业务接口 -->
-            <dependency>
-                <groupId>com.longlydeer</groupId>
-                <artifactId>deer-portal-service</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <!-- 业务接口 -->
-            <dependency>
-                <groupId>com.longlydeer</groupId>
-                <artifactId>deer-portal-service-impl</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <!--tomcat 集群-->
-            <dependency>
-                <groupId>com.longlydeer</groupId>
-                <artifactId>deer-kyo</artifactId>
-                <version>${project.version}</version>
-            </dependency>
 
             <!-- servlet-api -->
             <dependency>
