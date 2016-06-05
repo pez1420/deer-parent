@@ -37,6 +37,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.longlydeer</groupId>
+            <artifactId>deer-portal-entity</artifactId>
+            <version>${deer-portal-entity.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
@@ -59,6 +65,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

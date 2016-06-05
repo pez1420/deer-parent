@@ -38,6 +38,11 @@
         </dependency>
         <dependency>
             <groupId>com.longlydeer</groupId>
+            <artifactId>deer-portal-entity</artifactId>
+            <version>${deer-portal-entity.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.longlydeer</groupId>
             <artifactId>deer-portal-service</artifactId>
             <version>${deer-portal-service.version}</version>
         </dependency>

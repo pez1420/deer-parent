@@ -9,7 +9,6 @@
             classpath*:/spring-appcontext.xml
             classpath*:/spring-mvc.xml
             classpath*:/spring-mybatis.xml
-
         </param-value>
     </context-param>
 
@@ -42,11 +41,30 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
+    <servlet>
+        <description>This is a demo servlet of JCaptcha</description>
+        <servlet-name>ImageCaptchaServlet</servlet-name>
+        <servlet-class>com.longlydeer.deer.servlet.ImageCaptchaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <description>This is a demo servlet of JCaptcha</description>
+        <servlet-name>CaptchaValidationServlet</servlet-name>
+        <servlet-class>com.longlydeer.deer.servlet.CaptchaValidationServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>springmvc</servlet-name>
         <url-pattern>*.jhtml</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>ImageCaptchaServlet</servlet-name>
+        <url-pattern>/imageCaptchaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CaptchaValidationServlet</servlet-name>
+        <url-pattern>/captchaValidationServlet</url-pattern>
+    </servlet-mapping>
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

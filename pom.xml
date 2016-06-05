@@ -21,6 +21,7 @@
         <module>deer-portal-service-impl</module>
         <module>deer-web-portal</module>
         <module>deer-web-bank</module>
+        <module>deer-portal-entity</module>
     </modules>
 
     <properties>
@@ -36,6 +37,7 @@
         <deer-portal-service.version>1.0-SNAPSHOT</deer-portal-service.version>
         <deer-portal-service-impl.version>1.0-SNAPSHOT</deer-portal-service-impl.version>
         <deer-web-portal.version>1.0-SNAPSHOT</deer-web-portal.version>
+        <deer-portal-entity.version>1.0-SNAPSHOT</deer-portal-entity.version>
 
         <junit.veision>4.10</junit.veision>
         <easymock.version>3.4</easymock.version>
@@ -76,12 +78,11 @@
         <hibernate.validator.version>5.1.3.Final</hibernate.validator.version>
         <fastjson.version>1.1.31</fastjson.version>
         <hessian.version>4.0.7</hessian.version>
+        <jsoup.version>1.9.1</jsoup.version>
     </properties>
-
 
     <dependencyManagement>
         <dependencies>
-
             <!-- 单元测试 -->
             <dependency>
                 <groupId>junit</groupId>
@@ -89,7 +90,6 @@
                 <version>${junit.veision}</version>
                 <scope>test</scope>
             </dependency>
-
             <!-- 单元测试模拟 -->
             <dependency>
                 <groupId>org.easymock</groupId>
@@ -97,8 +97,6 @@
                 <version>${easymock.version}</version>
                 <scope>test</scope>
             </dependency>
-
-
             <!-- servlet-api -->
             <dependency>
                 <groupId>javax.servlet</groupId>
@@ -106,21 +104,18 @@
                 <version>${servlet.api.version}</version>
                 <scope>provided</scope>
             </dependency>
-
             <!-- spring context -->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
                 <version>${spring.version}</version>
             </dependency>
-
             <!-- spring-context-support -->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context-support</artifactId>
                 <version>${spring.version}</version>
             </dependency>
-
             <!-- spring aop -->
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -375,6 +370,12 @@
                 <scope>provided</scope>
             </dependency>
 
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${jsoup.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -395,6 +396,8 @@
                     <artifactId>mybatis-generator-maven-plugin</artifactId>
                     <version>1.3.2</version>
                     <configuration>
+                        <!--http://www.cnblogs.com/yjmyzz/p/4210554.html-->
+                        <configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
                         <verbose>true</verbose>
                         <overwrite>true</overwrite>
                     </configuration>

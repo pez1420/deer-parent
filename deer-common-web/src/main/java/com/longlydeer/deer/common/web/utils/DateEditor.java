@@ -7,8 +7,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ *
+ * @author pez1420@163.com
+ * @version 1.0
+ *
+ */
 public class DateEditor extends PropertyEditorSupport {
-	private boolean emptyAsNull;  //是否允许为空
+	private final boolean emptyAsNull;  //是否允许为空
 	private String dateFormat = "yyyy-MM-dd HH:mm:ss";
 
 	public DateEditor(boolean emptyAsNull) {
@@ -20,12 +26,14 @@ public class DateEditor extends PropertyEditorSupport {
 		this.dateFormat = dateFormat;
 	}
 
+	@Override
 	public String getAsText() {
 		Date date = (Date) getValue();
 		return date != null ? new SimpleDateFormat(this.dateFormat)
 				.format(date) : "";
 	}
 
+	@Override
 	public void setAsText(String text) {
 		if (text == null) {
 			setValue(null);

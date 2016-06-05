@@ -20,4 +20,41 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
+    <!-- Freemarker配置 -->
+    <bean id="freemarkerConfig"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/WEB-INF/template/,classpath:/" />
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="default_encoding">UTF-8</prop>
+                <prop key="url_escaping_charset">UTF-8</prop>
+                <!-- FreeMarker默认每隔5秒检查模板是否被更新，如果已经更新了，就会重新加载并分析模板。 但经常检查模板是否更新可能比较耗时。 -->
+                <prop key="template_update_delay">0</prop>
+                <!-- 设置标签类型 两种：[] 和 <> 。[] 这种标记解析要快些 -->
+                <prop key="tag_syntax">auto_detect</prop>
+                <!-- 去掉多余的空格,非常有用 -->
+                <prop key="whitespace_stripping">true</prop>
+                <!-- 设置数字格式 -->
+                <prop key="number_format">0.######</prop>
+                <prop key="locale">zh_CN</prop>
+                <prop key="date_format">yyyy-MM-dd</prop>
+                <prop key="time_format">HH:mm:ss</prop>
+                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+                <!--关键可以参考 http://blog.csdn.net/achilles12345/article/details/38085225-->
+                <prop key="classic_compatible">true</prop>
+                <prop key="object_wrapper">freemarker.ext.beans.BeansWrapper</prop>
+            </props>
+        </property>
+        <property name="freemarkerVariables">
+            <map>
+                <entry key="systemVersion" value="V1.0"></entry>
+                <entry key="base" value="#{servletContext.contextPath}" />
+                <entry key="locale" value="${locale}" />
+            </map>
+        </property>
+    </bean>
+
+    <!-- Jcaptcha配置 -->
+
+
 </beans>

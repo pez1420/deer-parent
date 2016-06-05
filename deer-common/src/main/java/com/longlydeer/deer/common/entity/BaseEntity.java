@@ -1,5 +1,7 @@
 package com.longlydeer.deer.common.entity;
 
+import com.longlydeer.deer.common.annotation.Meaning;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,8 +13,11 @@ public class BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1054447808965752862L;
 
+    @Meaning("主键")
     private Long id;
+    @Meaning("创建时间")
     private Date createDate;
+    @Meaning("修改时间")
     private Date modifyDate;
 
     public Long getId() {

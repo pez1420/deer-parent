@@ -1,4 +1,4 @@
-package com.longlydeer.deer.common.utils;
+package com.longlydeer.deer.common.web.utils;
 
 import java.io.Serializable;
 
