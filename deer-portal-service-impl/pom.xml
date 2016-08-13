@@ -31,9 +31,38 @@
 
         <dependency>
             <groupId>com.longlydeer</groupId>
+            <artifactId>deer-common-web</artifactId>
+            <version>${deer-common-web.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.longlydeer</groupId>
+            <artifactId>deer-portal-dao</artifactId>
+            <version>${deer-portal-dao.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.longlydeer</groupId>
             <artifactId>deer-portal-service</artifactId>
             <version>${deer-portal-service.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.octo.captcha</groupId>
+            <artifactId>jcaptcha-all</artifactId>
+        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -1,35 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
-       http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context-3.2.xsd
-       http://www.springframework.org/schema/mvc
-       http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:cache="http://www.springframework.org/schema/cache" xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+	http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-3.2.xsd
+	http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd"
        default-lazy-init="true">
     <context:property-placeholder location="classpath*:/deer.properties"
                                   ignore-resource-not-found="true"
                                   ignore-unresolvable="true"/>
 
-    <context:component-scan base-package="com.longlydeer" use-default-filters="false">
+    <!--如果打包成Jar包-->
+    <context:component-scan base-package="com.longlydeer.*" use-default-filters="false">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
+
+    <!--
+        启用缓存注解功能，这个是必须的，否则注解不会生效，另外，
+        该注解一定要声明在spring主配置文件中才会生效
+     -->
+    <cache:annotation-driven cache-manager="cacheManager" />
+
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager" >
+        <property name="cacheManager" ref="ehcacheManager"/>
+    </bean>
+
+    <bean id="ehcacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:/ehcache.xml"/>
+        <property name="shared" value="true"/>
+    </bean>
+
 
     <!-- Freemarker配置 -->
     <bean id="freemarkerConfig"
           class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-        <property name="templateLoaderPath" value="/WEB-INF/template/,classpath:/" />
+        <!-- 路径加入classpath:/ 为何会报 to [java.io.File]: using SpringTemplateLoader as fallback-->
+        <property name="templateLoaderPath" value="WEB-INF/template/" />
         <property name="freemarkerSettings">
             <props>
                 <prop key="default_encoding">UTF-8</prop>
                 <prop key="url_escaping_charset">UTF-8</prop>
                 <!-- FreeMarker默认每隔5秒检查模板是否被更新，如果已经更新了，就会重新加载并分析模板。 但经常检查模板是否更新可能比较耗时。 -->
-                <prop key="template_update_delay">0</prop>
+                <prop key="template_update_delay">3600</prop>
                 <!-- 设置标签类型 两种：[] 和 <> 。[] 这种标记解析要快些 -->
                 <prop key="tag_syntax">auto_detect</prop>
                 <!-- 去掉多余的空格,非常有用 -->
@@ -37,9 +50,10 @@
                 <!-- 设置数字格式 -->
                 <prop key="number_format">0.######</prop>
                 <prop key="locale">zh_CN</prop>
+                <prop key="datetime_format">yyyy-MM-dd</prop>
                 <prop key="date_format">yyyy-MM-dd</prop>
                 <prop key="time_format">HH:mm:ss</prop>
-                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+                <prop key="boolean_format">true,false</prop>
                 <!--关键可以参考 http://blog.csdn.net/achilles12345/article/details/38085225-->
                 <prop key="classic_compatible">true</prop>
                 <prop key="object_wrapper">freemarker.ext.beans.BeansWrapper</prop>
@@ -48,13 +62,91 @@
         <property name="freemarkerVariables">
             <map>
                 <entry key="systemVersion" value="V1.0"></entry>
-                <entry key="base" value="#{servletContext.contextPath}" />
-                <entry key="locale" value="${locale}" />
+                <entry key="base" value="#{servletContext.contextPath}"></entry>
+                <entry key="locale" value="zh_CN" />
             </map>
         </property>
     </bean>
 
-    <!-- Jcaptcha配置 -->
+    <bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+        <property name="config">
+            <bean class="com.google.code.kaptcha.util.Config">
+                <constructor-arg>
+                    <props>
+                        <prop key="kaptcha.border">no</prop>
+                        <prop key="kaptcha.border.color">105,179,90</prop>
+                        <prop key="kaptcha.textproducer.font.color">red</prop>
+                        <prop key="kaptcha.image.width">250</prop>
+                        <prop key="kaptcha.textproducer.font.size">90</prop>
+                        <prop key="kaptcha.image.height">90</prop>
+                        <prop key="kaptcha.session.key">code</prop>
+                        <prop key="kaptcha.textproducer.char.length">4</prop>
+                        <prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop>
+                    </props>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
 
+    <!--       <bean id="fastHashMapCaptchaStore" class="com.octo.captcha.service.captchastore.FastHashMapCaptchaStore"/>
+
+            <bean id="captchaEngineEx" class="com.longlydeer.deer.common.web.captcha.CustomListImageCaptchaEngine"/>
+
+            <bean id="imageCaptchaService" class="com.octo.captcha.service.image.DefaultManageableImageCaptchaService">
+                <constructor-arg type="com.octo.captcha.service.captchastore.CaptchaStore" index="0">
+                    <ref bean="fastHashMapCaptchaStore"/>
+                </constructor-arg>
+                <constructor-arg type="com.octo.captcha.engine.CaptchaEngine" index="1">
+                    <ref bean="captchaEngineEx"/>
+                </constructor-arg>
+                <constructor-arg index="2">
+                    <value>180</value>
+                </constructor-arg>
+                <constructor-arg index="3">
+                    <value>100000</value>
+                </constructor-arg>
+                <constructor-arg index="4">
+                    <value>75000</value>
+                </constructor-arg>
+            </bean>-->
+
+    <!-- Jcaptcha配置 -->
+<!--    <bean id="imageCaptchaService" class="com.octo.captcha.service.image.DefaultManageableImageCaptchaService">
+        <property name="captchaEngine">
+            <bean class="com.longlydeer.deer.common.web.captcha.CustomListImageCaptchaEngine"></bean>
+        </property>
+        &lt;!&ndash; 默认生成的图片180秒过期 , 可另行设置 &ndash;&gt;
+        <property name="minGuarantedStorageDelayInSeconds" value="3600" />
+&lt;!&ndash;        <property name="minGuarantedStorageDelayInSeconds" value="1800"></property>
+        <property name="captchaStoreMaxSize" value="100000"></property>
+        <property name="captchaStoreSizeBeforeGarbageCollection" value="75000"></property>&ndash;&gt;
+    </bean>-->
+
+    <!-- 用来定时刷新资源文件,可以不重启动 -->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <!-- 表示刷新的时间 -->
+        <property name="cacheSeconds" value="3600" />
+        <property name="useCodeAsDefaultMessage" value="true" />
+        <!-- basenames 指出了资源文件的位置  -->
+        <property name="basenames">
+            <list>
+                <value>/WEB-INF/language/front/message</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.FixedLocaleResolver">
+        <property name="defaultLocale" value="zh_CN" />
+    </bean>
+
+
+    <!--spring上下文 lazy-init值必须为false-->
+    <bean id="springContextUtils" class="com.longlydeer.deer.common.web.utils.SpringContextUtils" lazy-init="false">
+    </bean>
+
+    <!-- 引入Jar包中的XML配置文件 -->
+<!--
+    <import resource="spring-provider.xml"/>
+    <import resource="spring-mybatis.xml"/>
+-->
 
 </beans>

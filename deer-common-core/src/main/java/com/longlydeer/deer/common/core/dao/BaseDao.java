@@ -15,30 +15,30 @@ public interface BaseDao<T, ID extends Serializable>{
 	 * 增加一个实体,数据库增加一条记录
 	 * @param entity
 	 */
-	public abstract void save(T entity);
+	public  void save(T entity);
 	
 	/**
 	 * 修改一个实体
 	 * @param entity
 	 */
-	public abstract void update(T entity);
+	public  void update(T entity);
 	
 	/**
 	 * 主键返回对应实体
 	 * @param id
 	 * @return entity
 	 */
-	public abstract T find(ID id);
+	public  T find(ID id);
 	
 	/**
 	 * 按主键删除记录
 	 * @param id
 	 */
-	public abstract void remove(ID id);
+	public  void remove(ID id);
 	
 	/**
 	 * 统计记录总数
 	 * @return
 	 */
-	public abstract long count();
+	public  long count();
 }

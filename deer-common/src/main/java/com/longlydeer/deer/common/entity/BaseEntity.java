@@ -2,6 +2,7 @@ package com.longlydeer.deer.common.entity;
 
 import com.longlydeer.deer.common.annotation.Meaning;
 
+import javax.validation.groups.Default;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,8 +11,11 @@ import java.util.Date;
  *
  */
 public class BaseEntity implements Serializable {
-
     private static final long serialVersionUID = 1054447808965752862L;
+
+    public interface Save extends Default {}
+
+    public interface Update extends Default {}
 
     @Meaning("主键")
     private Long id;

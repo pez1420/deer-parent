@@ -22,4 +22,43 @@
             <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
+<!--
+    &lt;!&ndash;resource指定了需要根据profile哪个环境来替换属性值&ndash;&gt;
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>deer.properties</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+
+    <profiles>
+        &lt;!&ndash; 开发环境 &ndash;&gt;
+        <profile>
+            <id>dev</id>
+            <properties>
+                <jdbc_url>jdbc:mysql://127.0.0.1:3306/deer?useUnicode=true<![CDATA[&amp;]]>characterEncoding=utf-8</jdbc_url>
+                <jdbc_username>root</jdbc_username>
+                <jdbc_password>root</jdbc_password>
+            </properties>
+            &lt;!&ndash; 默认激活本环境 &ndash;&gt;
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        &lt;!&ndash; 正式环境 &ndash;&gt;
+        <profile>
+            <id>prod</id>
+            <properties>
+                <jdbc_url>jdbc:mysql://127.0.0.1:3306/deer?useUnicode=true<![CDATA[&amp;]]>characterEncoding=utf-8</jdbc_url>
+                <jdbc_username>root</jdbc_username>
+                <jdbc_password>deerDEER</jdbc_password>
+            </properties>
+        </profile>
+    </profiles>-->
 </project>

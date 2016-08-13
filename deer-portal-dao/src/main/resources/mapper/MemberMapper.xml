@@ -3,4 +3,181 @@
 
 <mapper namespace="com.longlydeer.deer.portal.dao.MemberDao">
 
+    <sql id="TableName">
+        member
+    </sql>
+
+    <sql id="NowTime">
+        now()
+    </sql>
+
+    <resultMap id="MemberMap" type="Member">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="is_enabled" property="isEnabled" jdbcType="BIT" />
+        <result column="is_locked" property="isLocked" jdbcType="BIT" />
+        <result column="login_failure_count" property="loginFailureCount" jdbcType="INTEGER" />
+        <result column="locked_date" property="lockedDate" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="register_ip" property="registerIp" jdbcType="VARCHAR" />
+        <result column="login_ip" property="loginIp" jdbcType="VARCHAR" />
+        <result column="login_date" property="loginDate" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="recommender" property="recommender" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <insert id="saveMember" parameterType="Member" useGeneratedKeys="true" keyProperty="id">
+        insert into <include refid="TableName"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            create_date,
+            modify_date,
+            <if test="username != null" >
+                username,
+            </if>
+            <if test="email != null" >
+                email,
+            </if>
+            <if test="password != null" >
+                password,
+            </if>
+            <if test="phone != null" >
+                phone,
+            </if>
+            <if test="isEnabled != null" >
+                is_enabled,
+            </if>
+            <if test="isLocked != null" >
+                is_locked,
+            </if>
+            <if test="loginFailureCount != null" >
+                login_failure_count,
+            </if>
+            <if test="lockedDate != null" >
+                locked_date,
+            </if>
+            <if test="registerIp != null" >
+                register_ip,
+            </if>
+            <if test="loginIp != null" >
+                login_ip,
+            </if>
+            <if test="loginDate != null" >
+                login_date,
+            </if>
+            <if test="recommender != null" >
+                recommender,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <include refid="NowTime"/>,
+            <include refid="NowTime"/>,
+            <if test="username != null" >
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="isEnabled != null" >
+                #{isEnabled,jdbcType=BIT},
+            </if>
+            <if test="isLocked != null" >
+                #{isLocked,jdbcType=BIT},
+            </if>
+            <if test="loginFailureCount != null" >
+                #{loginFailureCount,jdbcType=INTEGER},
+            </if>
+            <if test="lockedDate != null" >
+                #{lockedDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="registerIp != null" >
+                #{registerIp,jdbcType=VARCHAR},
+            </if>
+            <if test="loginIp != null" >
+                #{loginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="loginDate != null" >
+                #{loginDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="recommender != null" >
+                #{recommender,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="usernameExists" resultType="long" parameterType="java.lang.String">
+      select count(*)
+      from <include refid="TableName"/>
+      where username = #{username,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findByUsername" resultMap="MemberMap" parameterType="java.lang.String">
+      select *
+      from <include refid="TableName"/>
+      where username = #{username,jdbcType=VARCHAR}
+    </select>
+
+    <select id="find" resultMap="MemberMap"  parameterType="java.lang.String">
+        select *
+        from <include refid="TableName"/>
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <update id="update" parameterType="Member" >
+        update member
+        <set >
+            modify_date = now(),
+            <if test="createDate != null" >
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="username != null" >
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="isEnabled != null" >
+                is_enabled = #{isEnabled,jdbcType=BIT},
+            </if>
+            <if test="isLocked != null" >
+                is_locked = #{isLocked,jdbcType=BIT},
+            </if>
+            <if test="loginFailureCount != null" >
+                login_failure_count = #{loginFailureCount,jdbcType=INTEGER},
+            </if>
+            <if test="lockedDate != null" >
+                locked_date = #{lockedDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="registerIp != null" >
+                register_ip = #{registerIp,jdbcType=VARCHAR},
+            </if>
+            <if test="loginIp != null" >
+                login_ip = #{loginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="loginDate != null" >
+                login_date = #{loginDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="recommender != null" >
+                recommender = #{recommender,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+
+
 </mapper>

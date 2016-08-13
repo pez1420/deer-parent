@@ -18,7 +18,7 @@ public final class JsonUtil {
 		try {
 			gsonStr = gson.toJson(o);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("序列化失败!", e);
 		}
 		return gsonStr;
 	}

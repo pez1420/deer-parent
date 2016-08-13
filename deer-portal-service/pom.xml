@@ -6,10 +6,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>deer-portal-service</artifactId>
     <packaging>jar</packaging>
-
     <name>deer-portal-service</name>
 
     <properties>
@@ -40,6 +38,11 @@
             <groupId>com.longlydeer</groupId>
             <artifactId>deer-portal-entity</artifactId>
             <version>${deer-portal-entity.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
         </dependency>
 
         <dependency>

@@ -1,0 +1,15 @@
+body{margin: 0;font-family:'Microsoft YaHei',Helvetica,sans-serif}
+a{text-decoration:none;cursor:pointer}
+a:hover,a:focus{text-decoration:none; outline: none;}
+
+.top-tip{height:38px; line-height:38px;background:#cccccc;}
+.top-tip-container{ padding: 0 10px;}
+.top-tip-rl{float:right;margin-right:32px;font-family:'Microsoft YaHei',Helvetica,sans-serif;font-size:14px}
+.top-tip-rl-a{color:#fff; float:left; display:inline;margin-left:15px}
+.top-tip-rl-a:hover,a:focus{color:#aab2bd;}
+.header{background:#fff;padding:18px 0 8px;}
+
+.navbar-header{ margin: 2px 0;}
+.navbar-brand {height: 36px; padding: 0;}
+li a.active{color: #ff9933;}
+.unit-header{text-align:center;padding:0 0 30px}

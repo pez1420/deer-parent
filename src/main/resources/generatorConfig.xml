@@ -18,7 +18,7 @@
 		</javaTypeResolver>
 
 		<javaModelGenerator targetPackage="com.longlydeer"
-			targetProject="deer-portal-service/src/test/java">
+			targetProject="deer-portal-entity/src/test/java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
@@ -34,9 +34,9 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-		<table tableName="member" domainObjectName="Member"
-			enableCountByExample="false" enableSelectByExample="false"
-			enableUpdateByExample="false" enableDeleteByExample="false">
+		<table tableName="children" domainObjectName="Children"
+			enableCountByExample="true" enableSelectByExample="true"
+			enableUpdateByExample="true" enableDeleteByExample="true">
 		</table>
 
 	</context>

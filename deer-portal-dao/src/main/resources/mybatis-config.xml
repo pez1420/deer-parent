@@ -12,9 +12,13 @@
         <setting name="aggressiveLazyLoading" value="false"/>
     </settings>
 
-
+    <typeAliases>
+        <typeAlias alias="Member" type="com.longlydeer.deer.portal.entity.Member"/>
+        <typeAlias alias="Children" type="com.longlydeer.deer.portal.entity.Children"/>
+    </typeAliases>
 
     <!-- 映射map -->
     <mappers>
+
     </mappers>
 </configuration>

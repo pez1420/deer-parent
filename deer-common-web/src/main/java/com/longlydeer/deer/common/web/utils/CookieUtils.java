@@ -137,20 +137,19 @@ public final class CookieUtils {
         Assert.notNull(request);
         Assert.hasText(name);
 
-        String value = null;
         Cookie[] cookies = request.getCookies();
         if (cookies != null && cookies.length > 0) {
             for (Cookie cookie : cookies)
                 try {
-                    if (name.equals(URLDecoder.decode(cookie.getName(), COOKIE_DEFAULT_ENCODING))) {
-                        value = URLDecoder.decode(cookie.getValue(), COOKIE_DEFAULT_ENCODING);
-                        break;
+                    name = URLEncoder.encode(name, COOKIE_DEFAULT_ENCODING);
+                    if (name.equals(cookie.getName())) {
+                        return URLDecoder.decode(cookie.getValue(), COOKIE_DEFAULT_ENCODING);
                     }
                 } catch (UnsupportedEncodingException e) {
                     logger.error("cookie " + name + " failed to be deocoded!");
                 }
         }
-        return value;
+        return null;
     }
 
 }

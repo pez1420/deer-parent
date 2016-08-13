@@ -25,12 +25,19 @@
             <artifactId>deer-common-config</artifactId>
             <version>${deer-common-config.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.longlydeer</groupId>
+            <artifactId>deer-common-core</artifactId>
+            <version>${deer-common-core.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>com.longlydeer</groupId>
             <artifactId>deer-portal-entity</artifactId>
             <version>${deer-portal-entity.version}</version>
         </dependency>
+
+
 
         <dependency>
             <groupId>junit</groupId>
@@ -102,6 +109,7 @@
             <groupId>javax.persistence</groupId>
             <artifactId>persistence-api</artifactId>
         </dependency>
+
 
 
     </dependencies>

@@ -1,0 +1,18 @@
+﻿/* CSS Document */
+
+.cle{ clear:both;}
+.pictureshow{width:1200px; height:320px;margin:0 auto;}
+.pictureshow li{ width:290px; height:280px; float:left; padding-top:25px; padding-left:5px;list-style-type:none;}
+#boxgrid1{ width:290px; height:280px; overflow:hidden; position:relative; background:url(../img/teacher1_1.jpg) no-repeat; color:#e9dbc0;}
+#boxgrid2{ width:280px; height:280px; overflow:hidden; position:relative; background:url(../img/teacher2_2.jpg) no-repeat; color:#e9dbc0;}
+#boxgrid3{ width:280px; height:280px; overflow:hidden; position:relative; background:url(../img/teacher3_3.jpg) no-repeat; color:#e9dbc0;}
+#boxgrid4{ width:280px; height:280px; overflow:hidden; position:relative; background:url(../img/teacher4_4.jpg) no-repeat; color:#e9dbc0;}
+#boxgrid1 img{ position:absolute; top:0; left:0;}
+#boxgrid2 img{ position:absolute; top:0; left:0;}
+#boxgrid3 img{ position:absolute; top:0; left:0;}
+#boxgrid4 img{ position:absolute; top:0; left:0;}
+.boxgrid img{ position:absolute; top:0; left:0;}
+.boxgrid h3{ font:16px/28px "Microsoft YaHei"; padding-top:13px; padding-left:12px;}
+.boxgrid h3 span{ font-size:12px; font-family:Arial, Helvetica, sans-serif;}
+.boxgrid p{ line-height:28px; padding-left:12px;}
+.boxgrid a{ padding-left:12px; text-decoration:underline; color:#fff; line-height:28px;}

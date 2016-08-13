@@ -2,7 +2,7 @@ package com.longlydeer.deer.common.core.service;
 
 import java.io.Serializable;
 
-public abstract interface BaseService<T, ID extends Serializable> {
+public interface BaseService<T, ID extends Serializable> {
 
 	public abstract void save(T entity);
 	

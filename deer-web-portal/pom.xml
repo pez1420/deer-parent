@@ -47,6 +47,11 @@
             <version>${deer-portal-service.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.longlydeer</groupId>
+            <artifactId>deer-portal-service-impl</artifactId>
+            <version>${deer-portal-service-impl.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>junit</groupId>
@@ -249,6 +254,11 @@
         <dependency>
             <groupId>com.caucho</groupId>
             <artifactId>hessian</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.axet</groupId>
+            <artifactId>kaptcha</artifactId>
         </dependency>
 
     </dependencies>

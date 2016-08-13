@@ -18,14 +18,12 @@ public class BaseServiceImpl<T, ID extends Serializable> implements
 	
 	@Transactional
 	public void save(T entity) {
-		this.baseDao.save(entity);
-		
+		 this.baseDao.save(entity);
 	}
 
 	@Transactional
 	public void update(T entity) {
 		this.baseDao.update(entity);
-		
 	}
 
 	@Transactional(readOnly = true)

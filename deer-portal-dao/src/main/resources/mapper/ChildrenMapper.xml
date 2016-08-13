@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longlydeer.deer.portal.dao.ChildrenDao">
+
+    <sql id="ChildrenTableName">
+      children
+    </sql>
+
+    <sql id="NowTime">
+      now()
+    </sql>
+
+    <resultMap id="ChildrenMap" type="Children">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="gender" property="gender" jdbcType="BIT"/>
+        <result column="chinese_name" property="chineseName" jdbcType="VARCHAR"/>
+        <result column="english_name" property="englishName" jdbcType="VARCHAR"/>
+        <result column="member_id" property="memberId" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <!--保存-->
+    <insert id="saveChildren" parameterType="Children" useGeneratedKeys="true" keyProperty="id">
+        insert into <include refid="ChildrenTableName"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            create_date,
+            modify_date,
+            <if test="age != null">
+                age,
+            </if>
+            <if test="gender != null">
+                gender,
+            </if>
+            <if test="chineseName != null">
+                chinese_name,
+            </if>
+            <if test="englishName != null">
+                english_name,
+            </if>
+            <if test="memberId != null">
+                member_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <include refid="NowTime"/>,
+            <include refid="NowTime"/>,
+            <if test="age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="gender != null">
+                #{gender,jdbcType=BIT},
+            </if>
+            <if test="chineseName != null">
+                #{chineseName,jdbcType=VARCHAR},
+            </if>
+            <if test="englishName != null">
+                #{englishName,jdbcType=VARCHAR},
+            </if>
+            <if test="memberId != null">
+                #{memberId,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+
+    <!--更新孩子根据用户ID-->
+    <update id="updateByMemberId" parameterType="Children">
+        update <include refid="ChildrenTableName"/>
+        <set>
+            modify_date = <include refid="NowTime"/>,
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="gender != null">
+                gender = #{gender,jdbcType=BIT},
+            </if>
+            <if test="chineseName != null">
+                chinese_name = #{chineseName,jdbcType=VARCHAR},
+            </if>
+            <if test="englishName != null">
+                english_name = #{englishName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where member_id = #{memberId,jdbcType=BIGINT}
+    </update>
+
+
+    <select id="childrenExists" resultType="long" parameterType="Long">
+        select count(*)
+        from <include refid="ChildrenTableName"/>
+        where member_id = #{memberId,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByMemberId" parameterType="Long">
+        delete from <include refid="ChildrenTableName"/>
+        where member_id = #{memberId,jdbcType=BIGINT}
+    </delete>
+
+
+</mapper>

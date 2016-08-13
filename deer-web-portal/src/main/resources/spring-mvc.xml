@@ -16,15 +16,24 @@
                                   ignore-resource-not-found="true"
                                   ignore-unresolvable="true"/>
 
-    <context:component-scan base-package="com.longlydeer" use-default-filters="false">
+    <context:component-scan base-package="com.longlydeer.*" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+<!--
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+-->
     </context:component-scan>
 
 
-    <!-- <mvc:annotation-driven validator="validator" /> -->
     <!-- 声明明确支持注解驱动的MVC控制器（即@RequestMapping, @Controller，支持那些虽然是默认行为），
         以及增加支持declrative验证通过@有效和邮件正文编组@ RequestBody/ ResponseBody -->
-    <mvc:annotation-driven/>
+    <!--通知spring注解的方式注入validator  比如你的@Size @NotEmpty这些就自动注入了-->
+    <mvc:annotation-driven validator="validator"/>
+
+
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="validationMessageSource" ref="messageSource" />
+    </bean>
+
 
     <!-- 对模型视图添加前后缀 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"
